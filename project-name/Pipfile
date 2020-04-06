@@ -1,0 +1,39 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+ipython = "*"
+# bpython = "*"
+werkzeug = "*"
+
+[packages]
+django = "*"
+django-environ = "*"
+django-extensions = "*"
+# optional
+social-auth-app-django = "*"
+requests = "*"
+Pillow = "*"
+# database
+psycopg2-binary = "*"
+# RESTful API
+djangorestframework = "*"
+django-filter = "*"
+markdown = "*"
+drf-yasg = "*"
+django-cors-headers = "*"
+djangorestframework-simplejwt = "*"
+djangorestframework-camel-case = "*"
+# Celery
+celery = {extras = ["django"],version = "<4.4"}
+amqp = "*"
+# Object storage (S3/minio)
+django-storages = {extras = ["boto3"],version = "*"}
+# GraphQL(dependencie:RESTful)
+graphene-django = "*"
+python-dateutil = "*"
+
+[requires]
+python_version = "3.8"

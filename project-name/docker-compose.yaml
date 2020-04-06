@@ -1,0 +1,76 @@
+version: '3.3'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      args:
+        DOCKER_ROOT: ${DOCKER_ROOT}
+        DJANGO_ROOT: ${DJANGO_ROOT}
+    image: django-app
+    container_name: django-app_web
+    restart: always
+    volumes:
+      - ${DJANGO_ROOT}:/code
+    environment:
+      - SECRET_KEY=${SECRET_KEY}
+      - DEBUG=${DEBUG}
+      - ADMIN_USERNAME=${ADMIN_USERNAME}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      - DATABASE_URL=${DATABASE_URL}
+      - GOOGLE_OAUTH2_KEY=${GOOGLE_OAUTH2_KEY}
+      - GOOGLE_OAUTH2_SECRET=${GOOGLE_OAUTH2_SECRET}
+      - ALLOWED_HOSTS=${ALLOWED_HOSTS}
+    ports:
+      - "8000:8000"
+#  celery:
+#    image: django-app
+#    container_name: django-app_celery
+#    restart: always
+#    command: ["runcelery.sh"]
+#    volumes:
+#      - ${DJANGO_ROOT}:/code
+#    environment:
+#      - BROKER_URL=pyamqp://${RABBITMQ_DEFAULT_USER}:${RABBITMQ_DEFAULT_PASS}@rabbitmq:5672
+#      - SECRET_KEY=${SECRET_KEY}
+#      - DEBUG=${DEBUG}
+#      - ADMIN_USERNAME=${ADMIN_USERNAME}
+#      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+#      - DATABASE_URL=${DATABASE_URL}
+#      - GOOGLE_OAUTH2_KEY=${GOOGLE_OAUTH2_KEY}
+#      - GOOGLE_OAUTH2_SECRET=${GOOGLE_OAUTH2_SECRET}
+#      - ALLOWED_HOSTS=${ALLOWED_HOSTS}
+#    depends_on:
+#      - app
+#      - rabbitmq
+
+  nginx:
+    image: nginx:alpine
+    restart: always
+    volumes:
+      - ${DJANGO_ROOT}/media/:/var/www/media/
+      - ${DJANGO_ROOT}/assets/:/var/www/assets/:ro
+      - ${DOCKER_ROOT}/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    ports:
+      - "80:80"
+    depends_on:
+      - app
+#   RabbitMQ - queue
+#   rabbitmq:
+#       image: rabbitmq:3-management
+#       # container_name: esys-emonitor_rabbitmq
+#       # restart: always
+#       environment:
+#           - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
+#           - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS}
+#       # ports:
+#       #     - "5672:5672"
+#       #     - "15672:15672"
+#  db:
+#    image: postgres:alpine
+#    environment:
+#      POSTGRES_DB: ${DATABASE_NAME}
+#      POSTGRES_USER: ${DATABASE_USER}
+#      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+
