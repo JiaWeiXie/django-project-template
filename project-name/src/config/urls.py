@@ -19,7 +19,7 @@ from django.conf.urls import include
 from django.contrib import admin
 from django.urls import path
 
-from app.utils.api_schema import schema_view
+from app.utils.restful.api_schema import schema_view
 from config.rest_routes import router
 
 api_urlpatterns = [

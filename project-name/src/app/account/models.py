@@ -85,7 +85,6 @@ class User(AbstractUser):
         return f"{self.last_name}{self.first_name}".strip()
 
     class Meta:
-        app_label = 'auth_account'
         verbose_name = '使用者帳號'
         verbose_name_plural = '使用者帳號'
 

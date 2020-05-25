@@ -59,7 +59,6 @@ services:
 #   RabbitMQ - queue
 #   rabbitmq:
 #       image: rabbitmq:3-management
-#       # container_name: esys-emonitor_rabbitmq
 #       # restart: always
 #       environment:
 #           - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
