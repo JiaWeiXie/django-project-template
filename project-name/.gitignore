@@ -201,3 +201,5 @@ src/log/*
 src/assets/*
 !src/assets/.gitkeep
 !/src/media/
+!local-docker/files/.gitkeep
+local-docker/files/*

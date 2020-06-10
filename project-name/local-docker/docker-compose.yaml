@@ -1,0 +1,38 @@
+version: '3.3'
+
+services:
+  db:
+    image: postgres:alpine
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: server
+      POSTGRES_PASSWORD: CEdvP3w8HRMYHdVqfDuFda4NdKsZM4tC
+    ports:
+      - "5432:5432"
+  minio:
+    image: minio/minio:latest
+    volumes:
+      - ./files:/data
+    ports:
+      - "9000:9000"
+    environment:
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin
+    command: server /data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+#   RabbitMQ - queue
+#   rabbitmq:
+#       image: rabbitmq:3-management
+#       # restart: always
+#       environment:
+#           - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
+#           - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS}
+#       # ports:
+#       #     - "5672:5672"
+#       #     - "15672:15672"
+
+

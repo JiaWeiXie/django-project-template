@@ -9,7 +9,6 @@ services:
         DOCKER_ROOT: ${DOCKER_ROOT}
         DJANGO_ROOT: ${DJANGO_ROOT}
     image: django-app
-    container_name: django-app_web
     restart: always
     volumes:
       - ${DJANGO_ROOT}:/code
@@ -26,7 +25,6 @@ services:
       - "8000:8000"
 #  celery:
 #    image: django-app
-#    container_name: django-app_celery
 #    restart: always
 #    command: ["runcelery.sh"]
 #    volumes:
