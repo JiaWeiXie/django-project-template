@@ -12,15 +12,8 @@ services:
     restart: always
     volumes:
       - ${DJANGO_ROOT}:/code
-    environment:
-      - SECRET_KEY=${SECRET_KEY}
-      - DEBUG=${DEBUG}
-      - ADMIN_USERNAME=${ADMIN_USERNAME}
-      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
-      - DATABASE_URL=${DATABASE_URL}
-      - GOOGLE_OAUTH2_KEY=${GOOGLE_OAUTH2_KEY}
-      - GOOGLE_OAUTH2_SECRET=${GOOGLE_OAUTH2_SECRET}
-      - ALLOWED_HOSTS=${ALLOWED_HOSTS}
+    env_file:
+      - .env
     ports:
       - "8000:8000"
 #  celery:
@@ -29,16 +22,8 @@ services:
 #    command: ["runcelery.sh"]
 #    volumes:
 #      - ${DJANGO_ROOT}:/code
-#    environment:
-#      - BROKER_URL=pyamqp://${RABBITMQ_DEFAULT_USER}:${RABBITMQ_DEFAULT_PASS}@rabbitmq:5672
-#      - SECRET_KEY=${SECRET_KEY}
-#      - DEBUG=${DEBUG}
-#      - ADMIN_USERNAME=${ADMIN_USERNAME}
-#      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
-#      - DATABASE_URL=${DATABASE_URL}
-#      - GOOGLE_OAUTH2_KEY=${GOOGLE_OAUTH2_KEY}
-#      - GOOGLE_OAUTH2_SECRET=${GOOGLE_OAUTH2_SECRET}
-#      - ALLOWED_HOSTS=${ALLOWED_HOSTS}
+#    env_file:
+#      - .env
 #    depends_on:
 #      - app
 #      - rabbitmq
