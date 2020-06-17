@@ -19,16 +19,16 @@ from django.conf.urls import include
 from django.contrib import admin
 from django.urls import path
 
-from app.utils.restful.api_schema import schema_view
-from config.rest_routes import router
+# from app.utils.restful.api_schema import schema_view
+# from config.rest_routes import router
 
-api_urlpatterns = [
-    path('', include(router.urls)),
-]
+# api_urlpatterns = [
+#     path('', include(router.urls)),
+# ]
 
 urlpatterns = [
-    path('api/', include(api_urlpatterns)),
+    # path('api/', include(api_urlpatterns)),
     path('admin/', admin.site.urls),
-    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    # path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
 ]
 # urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

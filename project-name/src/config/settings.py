@@ -45,7 +45,7 @@ DJANGO_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
-    'corsheaders',
+    # 'corsheaders',
     'django_extensions',
     'rest_framework',
     # 'rest_framework.authtoken',
@@ -210,7 +210,7 @@ USE_X_FORWARDED_PORT = True
 LOGIN_URL = '/admin/login/'
 LOGOUT_URL = '/admin/logout/'
 # CORS header
-CORS_ORIGIN_WHITELIST = env.list('CORS_ORIGIN_WHITELIST', default=[])
+# CORS_ORIGIN_WHITELIST = env.list('CORS_ORIGIN_WHITELIST', default=[])
 
 # Swagger
 SWAGGER_SETTINGS = {
